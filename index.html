@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dam Nation</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
+    <link rel="stylesheet" href="./css/L.Control.Sidebar.css" />
+    <!--[if lte IE 8]><link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" /><![endif]-->
+
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        html, body, #map {
+            height: 100%;
+        }
+
+        .info {
+            font-style: italic;
+            color: #AAA;
+        }
+        #title {
+          position: absolute;
+          right: 10px;
+          top:10px;
+          z-index: 1;
+          text-align: right;
+        }
+        #title p {
+          margin: 0;
+          padding: 1px;
+        }
+    </style>
+</head>
+<body>
+    <div id="title">
+      <img src="http://www.damnationfilm.com/wp-content/themes/DamNation/images/logo.png"/>
+      <p><a href="#">request a screening</a></p>
+    </div>
+    <div id="sidebar">
+        <h1 id="name">Dam Nation</h1>
+
+        <p>Resources:</p>
+
+        <ul>
+            <li><a href="#">A call to action</a></li>
+            <li><a href="#">Learn more about this dam</a></li>
+        </ul>
+        <p class="info"> Here we'll place more infomation about each dam, such as: 
+        <ul>
+            <li>critical information</li>
+            <li>news and updates</li>
+            <li>photos</li>
+            <li>etc</li>
+        </ul>
+        </p>
+
+    </div>
+
+    <div id="map"></div>
+
+    <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
+    <script src="./js/L.Control.Sidebar.js"></script>
+
+    <script>
+        var dams = {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":["-83.87583","41.4125"]},"properties":{"Nid Height":"8.0","Normal Sto":"8925.0","Surf Area":"1785.0","Hazard":"H","City":"COLUMBUS","River":"MAUMEE RIVER","Own Type":"S","Max Stor":"0.0","Dams00 X020":"5844","Purposes":"RS","Other Name":"","Nidid":"OH02769","Own Name":"ODNR, DIVISION OF WATER","Yr Compl":"1907","   Symbol":"R","State":"OH","Dam Name":"GRAND RAPIDS DAM","Dam Type":"CNPG","Drain Area":"6058.0","County":"WOOD","latitude":"41.4125000237358","longitude":"-83.87582998453"}},{"type":"Feature","geometry":{"type":"Point","coordinates":["-120.11167","39.32667"]},"properties":{"Nid Height":"113.0","Normal Sto":"20400.0","Surf Area":"768.0","Hazard":"H","City":"RENO","River":"MARTIS CREEK","Own Type":"F","Max Stor":"20400.0","Dams00 X020":"4422","Purposes":"CR","Other Name":"MARTIS CREEK LAKE","Nidid":"CA10108","Own Name":"CESPK","Yr Compl":"1972","   Symbol":"C","State":"CA","Dam Name":"MARTIS CREEK DAM","Dam Type":"RE","Drain Area":"39.0","County":" NEVADA","latitude":"39.3266699792834","longitude":"-120.111670004386"}},{"type":"Feature","geometry":{"type":"Point","coordinates":["-122.237","37.4"]},"properties":{"Nid Height":"68.0","Normal Sto":"952.0","Surf Area":"90.0","Hazard":"H","City":"","River":"CORTE MADERA CR","Own Type":"P","Max Stor":"0.0","Dams00 X020":"3085","Purposes":"I","Other Name":"","Nidid":"CA00669","Own Name":"STANFORD UNIV TRUSTEE BOARD","Yr Compl":"1890","   Symbol":"I","State":"CA","Dam Name":"SEARSVILLE","Dam Type":"PG","Drain Area":"14.8","County":"SAN MATEO","latitude":"37.     4000000126511","longitude":"-122.236999976285"}},{"type":"Feature","geometry":{"type":"Point","coordinates":["-121.667","36.385"]},"properties":{"Nid Height":"148.0","Normal Sto":"3100.0","Surf Area":"67.0","Hazard":"H","City":"","River":"CARMEL RIVER","Own Type":"U","Max Stor":"0.0","Dams00 X020":"2616","Purposes":"STODIDON","Other Name":"","Nidid":"CA00692","Own Name":"CALIF-AMERICAN WATER CO","Yr Compl":"1949","   Symbol":"S","State":"CA","Dam Name":"LOS PADRES","Dam Type":"ER","Drain Area":"44.9","County":"MONTEREY","latitude":"36.  3850000047174","longitude":"-121.667000019068"}},{"type":"Feature","geometry":{"type":"Point","coordinates":["-119.50146","48.89904"]},"properties":{"Nid Height":"63.0","Normal Sto":"2400.0","Surf Area":"2400.0","Hazard":"H","City":"OROVILLE","River":"SIMILKAMEEN RIVER","Own Type":"U","Max Stor":"2400.0","Dams00 X020":"8080","Purposes":"H","Other Name":"ENLOE DAM","Nidid":"WA00097","Own Name":"OKANOGAN COUNTY PUD","Yr Compl":"1905","   Symbol":"H","State":"WA","Dam Name":"ENLOE DAM","Dam Type":"VA","Drain Area":" 3590.0","County":"OKANOGAN","latitude":"48.899040024135","longitude":"-119.501460018462"}},{"type":"Feature","geometry":{"type":"Point","coordinates":["-81.49722","41.12305"]},"properties":{"Nid Height":"57.0","Normal Sto":"589.0","Surf Area":"34.0","Hazard":"H","City":"AKRON","River":"CUYAHOGA RIVER","Own Type":"U","Max Stor":"0.0","Dams00 X020":"5678","Purposes":"O","Other Name":"","Nidid":"OH00481","Own Name":"OHIO EDISON COMPANY","Yr Compl":"1912","   Symbol":"O","State":"OH","Dam Name":"GORGE PLANT DAM","Dam Type":"CN","Drain Area":"0.06","County":"SUMMIT","latitude":"41.  1230500223417","longitude":"-81.4972199890014"}},{"type":"Feature","geometry":{"type":"Point","coordinates":["-131.67","55.43333"]},"properties":{"Nid Height":"96.0","Normal Sto":"6000.0","Surf Area":"320.0","Hazard":"H","City":"WARD COVE","River":"WARD CREEK","Own Type":"P","Max Stor":"11000.0","Dams00 X020":"8094","Purposes":"SO","Other Name":"WARD LAKE","Nidid":"AK00010","Own Name":"KETCHIKAN PULP CO.","Yr Compl":"1953","   Symbol":"S","State":"AK","Dam Name":"LAKE CONNELL","Dam Type":"PGER","Drain Area":"12.5","County":"KETCHIKAN GATEWAY","latitude":"55.4333300211944","longitude":"-131.669999984028"}},{"type":"Feature","geometry":{"type":"Point","coordinates":["-113.49167","42.66806"]},"properties":{"Nid Height":"40.0","Normal Sto":"210200.0","Surf Area":"11850.0","Hazard":"H","City":"HEYBURN","River":"SNAKE RIVER","Own Type":"F","Max Stor":"220200.0","Dams00 X020":"6444","Purposes":"IHR","Other Name":"LAKE WALCOTT","Nidid":"ID82905","Own Name":"DOI BR","Yr Compl":"1905","   Symbol":"I","State":"ID","Dam Name":"MINIDOKA SPILLWAY","Dam Type":"CN","Drain Area":"   15700.0","County":"CASSIA","latitude":"42.6680599826583","longitude":"-113.49166998127"}},{"type":"Feature","geometry":{"type":"Point","coordinates":["-113.48611","42.67"]},"properties":{"Nid Height":"86.0","Normal Sto":"95200.0","Surf Area":"11850.0","Hazard":"H","City":"HEYBURN","River":"SNAKE RIVER","Own Type":"F","Max Stor":"95200.0","Dams00 X020":"6447","Purposes":"IHR","Other Name":"LAKE WALCOTT","Nidid":"ID00275","Own Name":"DOI BR","Yr Compl":"1905","   Symbol":"I","State":"ID","Dam Name":"MINIDOKA","Dam Type":"RE","Drain Area":"15700.0","County":"         ","latitude":" CASSIA","longitude":"42.6699999994484"}},{"type":"Feature","geometry":{"type":"Point","coordinates":["-114.9075","42.77167"]},"properties":{"Nid Height":"70.0","Normal Sto":"90.0","Surf Area":"5.0","Hazard":"S","City":"","River":"SNAKE RIVER","Own Type":"P","Max Stor":"90.0","Dams00 X020":"6487","Purposes":"H","Other Name":"UPPER POWERHOUSE FOREBAY DAM","Nidid":"ID83073","Own Name":"IDAHO POWER COMPANY","Yr Compl":"1947","   Symbol":"H","State":"ID","Dam Name":"UPPER SALMON     FALLS B-PLANT FOREBAY","Dam Type":"CNPG","Drain Area":"32200.0","County":"TWIN FALLS","latitude":"42.7716700138459","longitude":"-114.907500017383"}},{"type":"Feature","geometry":{"type":"Point","coordinates":["-114.92389","42.7725"]},"properties":{"Nid Height":"85.0","Normal Sto":"26.0","Surf Area":"1.0","Hazard":"S","City":"","River":"SNAKE RIVER","Own Type":"P","Max Stor":"26.0","Dams00 X020":"6489","Purposes":"H","Other Name":"LOWER POWERHOUSE FOREBAY DAM","Nidid":"ID83074","Own Name":"IDAHO POWER COMPANY","Yr Compl":"1937","   Symbol":"H","State":"ID","Dam Name":"UPPER SALMON     FALLS A-PLANT & FOREBAY","Dam Type":"CNPG","Drain Area":"32200.0","County":"TWIN FALLS","latitude":"42.7724999828334","longitude":"-114.923889979738"}},{"type":"Feature","geometry":{"type":"Point","coordinates":["-112.875","42.77917"]},"properties":{"Nid Height":"103.5","Normal Sto":"1671300.0","Surf Area":"58076.0","Hazard":"H","City":"AMERICAN FALLS","River":"SNAKE RIVER","Own Type":"F","Max Stor":"1671300.0","Dams00 X020":"6492","Purposes":"IHR","Other Name":"AMERICAN FALLS","Nidid":"ID00274","Own Name":"DOI BR","Yr Compl":"1977","   Symbol":"I","State":"ID","Dam Name":"AMERICAN      FALLS","Dam Type":"CNPG","Drain Area":"13580.0","County":"POWER","latitude":"42.7791700043614","longitude":"-112.875000020821"}},{"type":"Feature","geometry":{"type":"Point","coordinates":["-122.055","42.11833"]},"properties":{"Nid Height":"68.0","Normal Sto":"3380.0","Surf Area":"420.0","Hazard":"S","City":"HORSE CREEK","River":"KLAMATH R","Own Type":"P","Max Stor":"3380.0","Dams00 X020":"6169","Purposes":"HR","Other Name":"NONE","Nidid":"OR00559","Own Name":"PACIFICORP","Yr Compl":"1958","   Symbol":"H","State":"OR","Dam Name":"JOHN C BOYLE","Dam Type":"PGER","Drain Area":"4080.0","County":"KLAMATH","latitude":"  42.118330021376","longitude":"-122.054999986887"}},{"type":"Feature","geometry":{"type":"Point","coordinates":["-121.35","42.1017"]},"properties":{"Nid Height":"60.0","Normal Sto":"750.0","Surf Area":"120.0","Hazard":"L","City":"OLENE","River":"WRIGHT CREEK","Own Type":"P","Max Stor":"750.0","Dams00 X020":"6160","Purposes":"I","Other Name":"NONE","Nidid":"OR00240","Own Name":"JOHN MCFALL","Yr Compl":"1909","   Symbol":"I","State":"OR","Dam Name":"HARPOLD RESERVOIR","Dam Type":"RE","Drain Area":"2.0","County":"KLAMATH","latitude":"42.      101699984547","longitude":"-121.350000006665"}},{"type":"Feature","geometry":{"type":"Point","coordinates":["-121.96","42.1333"]},"properties":{"Nid Height":"37.0","Normal Sto":"18500.0","Surf Area":"163.0","Hazard":"H","City":"HORSE CREEK","River":"KLAMATH RIVER","Own Type":"U","Max Stor":"18500.0","Dams00 X020":"6184","Purposes":"HR","Other Name":"NONE","Nidid":"OR00558","Own Name":"PACIFIC POWER AND LIGHT","Yr Compl":"1966","   Symbol":"H","State":"OR","Dam Name":"KENO DAM","Dam Type":"PG","Drain Area":"3920. 0","County":"KLAMATH","latitude":"42.1333000233673","longitude":"-121.959999994017"}},{"type":"Feature","geometry":{"type":"Point","coordinates":["-121.95","42.15"]},"properties":{"Nid Height":"31.0","Normal Sto":"18500.0","Surf Area":"5000.0","Hazard":"L","City":"","River":"KLAMATH R","Own Type":"P","Max Stor":"18500.0","Dams00 X020":"6193","Purposes":"HO","Other Name":"","Nidid":"OR83018","Own Name":"PACIFICORP","Yr Compl":"1966","   Symbol":"H","State":"OR","Dam Name":"KENO","Dam Type":"PG","Drain Area":"3920.0","County":"KLAMATH","latitude":"42.1499999951452","longitude":"-121.      950000022807"}},{"type":"Feature","geometry":{"type":"Point","coordinates":["-117.07","46.39667"]},"properties":{"Nid Height":"60.0","Normal Sto":"55.0","Surf Area":"0.0","Hazard":"S","City":"CLARKSTON","River":"NONE-GROUND WATER STORAGE","Own Type":"U","Max Stor":"58.0","Dams00 X020":"7589","Purposes":"S","Other Name":"","Nidid":"WA00083","Own Name":"","Yr Compl":"1907","   Symbol":"S","State":"WA","Dam Name":"POMEROY GULCH DAM","Dam Type":"VA","Drain Area":"0.31000000238","County":"ASOTIN","latitude":" 46.3966700145057","longitude":"-117.069999978698"}},{"type":"Feature","geometry":{"type":"Point","coordinates":["-119.787","37.948"]},"properties":{"Nid Height":"312.0","Normal Sto":"360000.0","Surf Area":"1972.0","Hazard":"H","City":"","River":"TUOLUMNE RIVER","Own Type":"L","Max Stor":"0.0","Dams00 X020":"3427","Purposes":"STODONPO","Other Name":"HETCH HETCHY RES","Nidid":"CA00123","Own Name":"CITY COUNTY SAN FRANCISCO","Yr Compl":"1923","   Symbol":"S","State":"CA","Dam Name":"O        SHAUGHNESSY","Dam Type":"PG","Drain Area":"459.0","County":"TUOLUMNE","latitude":"37.9480000041468","longitude":"-119.787000007236"}},{"type":"Feature","geometry":{"type":"Point","coordinates":["-93.03333","46.22"]},"properties":{"Nid Height":"6.0","Normal Sto":"5805.0","Surf Area":"398.0","Hazard":"L","City":"RUTLEDGE","River":"PINE RIVER","Own Type":"S","Max Stor":"6966.0","Dams00 X020":"7545","Purposes":"O","Other Name":"","Nidid":"MN00542","Own Name":"STATE OF MN","Yr Compl":"1937","   Symbol":"O","State":"MN","Dam Name":"BIG PINE LAKE","Dam Type":"PG","Drain Area":"0.0","County":"PINE","latitude":"46.2199999980905","longitude":"-93.0333299790491"}},{"type":"Feature","geometry":{"type":"Point","coordinates":["-122.22793","48.40149"]},"properties":{"Nid Height":"50.0","Normal Sto":"109.0","Surf Area":"109.0","Hazard":"S","City":"MOUNT VERNON","River":"TR-NOOKACHAMPS CREEK","Own Type":"P","Max Stor":"126.0","Dams00 X020":"8013","Purposes":"C","Other Name":"","Nidid":"WA00141","Own Name":"","Yr Compl":"1969","   Symbol":"C","State":"WA","Dam Name":"NOOKACHAMPS HILLS DAM","Dam Type":"RE","Drain Area":"0.           30000001192","County":"SKAGIT","latitude":"48.4014900101683","longitude":"-122.227929984914"}},{"type":"Feature","geometry":{"type":"Point","coordinates":["-69.79","44.22"]},"properties":{"Nid Height":"21.0","Normal Sto":"14100.0","Surf Area":"856.0","Hazard":"H","City":"GARDINER","River":"COBBOSSEECONTEE STREAM","Own Type":"L","Max Stor":"14100.0","Dams00 X020":"6953","Purposes":"HCRSPF","Other Name":"NEW MILLS DAM","Nidid":"ME00095","Own Name":"GARDINER WATER DISTRICT","Yr Compl":"1885","   Symbol":"H","State":"ME","Dam Name":"  GARDINER WATER DISTRICT DAM","Dam Type":"CNTCMS","Drain Area":"217.0","County":"KENNEBEC","latitude":"44.2199999927163","longitude":"-69.7900000046953"}}]};
+
+
+        var map = L.map('map');
+        map.setView([41.4261, -105.5153], 4);
+
+        L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg', {
+            maxZoom: 18,
+            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>'
+        }).addTo(map);
+
+        var sidebar = L.control.sidebar('sidebar', {
+            closeButton: true,
+            position: 'left'
+        });
+        map.addControl(sidebar);
+
+        //setTimeout(function () {
+        //    sidebar.show();
+        //}, 500);
+
+        //var marker = L.marker([41.4261, -105.5153]).addTo(map).on('click', function () {
+        //    sidebar.toggle();
+        //});
+
+        layer = L.geoJson(dams, {
+          onEachFeature: function (feature, layer) {
+            layer.on('click', function (e) {
+              //console.log(feature.properties['Dam Name']);
+              document.getElementById('name').innerHTML = feature.properties['Dam Name'];
+              sidebar.show();
+            });
+          }
+        }).addTo(map)
+
+        //.on('click', function () {
+        //    //console.log(arguments)
+        //});
+
+        map.on('click', function () {
+            sidebar.hide();
+        })
+
+        sidebar.on('show', function () {
+            console.log('Sidebar visible.');
+        });
+
+        sidebar.on('hide', function () {
+            console.log('Sidebar hidden.');
+        });
+
+        L.DomEvent.on(sidebar.getCloseButton(), 'click', function () {
+            console.log('Close button clicked.');
+        });
+    </script>
+</body>
+</html>
