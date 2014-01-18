@@ -10,6 +10,28 @@
     <!--[if lte IE 8]><link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" /><![endif]-->
 
     <style>
+        @font-face {
+          font-family: 'Univers LT STD';
+          src: url("css/fonts/UniversLTStd.otf") format("opentype");
+        }
+
+        #logo {
+          font-family: 'Univers LT STD';
+          text-transform: uppercase;
+          font-weight: bold;
+          font-size: 48px;
+          margin:0px;
+          padding: 0px;
+        }
+
+        #logo .turq {
+          color: #1F9AB3;
+        }
+
+        #logo .gray {
+          color: #a9a9a9;
+        }
+
         body {
             padding: 0;
             margin: 0;
@@ -38,9 +60,11 @@
 </head>
 <body>
     <div id="title">
-      <img src="http://www.damnationfilm.com/wp-content/themes/DamNation/images/logo.png"/>
+      <!--img src="http://www.damnationfilm.com/wp-content/themes/DamNation/images/logo.png"/-->
+      <h1 id="logo"><span class="turq">DAM</span><span class="gray">NATION</span></h1>
       <p><a href="#">request a screening</a></p>
     </div>
+    <div id="sidebar-right"></div>
     <div id="sidebar">
         <h1 id="name">Dam Nation</h1>
 
@@ -82,6 +106,12 @@
             closeButton: true,
             position: 'left'
         });
+
+        sidebarRight = L.control.sidebar('sidebar-right', {
+            closeButton: true,
+            position: 'right'
+        });
+        map.addControl(sidebarRight);
         map.addControl(sidebar);
 
         //setTimeout(function () {
