@@ -1,4 +1,4 @@
-Dam Name,latitude,longitude
+name,latitude,longitude
 Matillja Dam, 34.484767, -119.3086
 Rindge Dam, 34.0644333, -118.698833 
 Los Padres Dam, 36.3850000047174, -121.667000019068
@@ -8,25 +8,27 @@ Mirra Pond Dam, 44.07576666, -121.306516
 Fielder Dam, 42.47555, 123.1824833
 Wimer Dam, 42.47556666, 123.1824833
 Enloe Dam, 48.899040024135, -119.501460018462
-Ohio Edison Dam, 
-Grand Rapids Dams (5 in total),
+Ohio Edison Dam, 41.1230333, -81.49725 
+Grand Rapids Dam 1, 41.4125000237358, -83.87582998453
+Grand Rapids Dam 2, 47.2483300237795, -93.58667001726 
+Grand Rapids Dam 3, 47.2866700190767,-93.49666998578
+Grand Rapids Dam 4, 47.4066700126187,-93.49666998578
+Grand Rapids Dam 5, 47.499999993781, -93.0166700116117
 Connell Dam, 55.4333300211944,-131.669999984028
-Snake River Dams
-Ice Harbor Dam, 
-Lower Monument Dam, 
-Little Goose Dam, 
-Lower Granite Dam, 
-Klamath Dams
-Iron Gate Dam,
-Copco 1,
-Copco 2, 
-JOHN C BOYLE DAM,42.118330021376,-122.054999986887
+Ice Harbor Dam, 46.2492, -118.87975
+Lower Monument Dam, 46.5629833, -118.5388333
+Little Goose Dam, 46.5854, -118.0273833
+Lower Granite Dam, 46.66056, -117.42835 
+Iron Gate Dam, 41.9344833, -122.4361333
+Copco Dam 1, 41.9789833, -122.3401
+Copco Dam 2, 41.979533, -122.3347
+John C. Boyle Dam,42.118330021376,-122.054999986887
 POMEROY DAM, 46.3966700145057,-117.069999978698
-Engelbright Dam.
-Hetch Hetchy 
-GLEN CANYON,36.9180600216928,-111.499440019925
-Pine River Dam 
-Middle Fork Nooksack Diversion Dam
-Brunswick Dam 
-Kennebec River Dams 
-Centervill Dam 
+Engelbright Dam, 39.2398833, -121.269
+Hetch Hetchy Dam, 37.94765, -119.7879333 
+Glen Canyon Dam, 36.9180600216928,-111.499440019925
+Pine River Dam, 46.6691, -94.1128333 
+Middle Fork Nooksack Diversion Dam, 0, 0
+Kennebec River Dams, 44.5455333, -69.6284333 
+Brunswick Dam, 43.9202833, -69.96785
+Centervill Dam, 36.7623333, -119.4431667
