@@ -19,9 +19,11 @@
           font-family: 'Univers LT STD';
           text-transform: uppercase;
           font-weight: bold;
-          font-size: 48px;
+          font-size: 44px;
           margin:0px;
           padding: 0px;
+          text-shadow: 0 0 5px #fff;
+          letter-spacing: -5px;
         }
 
         #logo .turq {
@@ -116,7 +118,7 @@
         //L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg', {
         L.tileLayer('http://{s}.acetate.geoiq.com/tiles/acetate-bg/{z}/{x}/{y}.png', {
             maxZoom: 18,
-            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>'
+            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a> & Esri, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>'
         }).addTo(map);
 
         L.tileLayer('tiles/{z}/{x}/{y}', {
